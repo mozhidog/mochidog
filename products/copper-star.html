@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mozhi Dog — Product</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="paw">🐾</span> Mozhi Dog</a>
+    <button class="mobile-menu-btn">☰</button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/shop.html">Shop</a></li>
+        <li><a href="/how-it-works.html">How It Works</a></li>
+        <li><a href="/about.html">Our Story</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><button class="cart-btn" data-cart-toggle>🛒 Cart <span class="cart-count">0</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="padding-top:40px">
+  <div class="section-inner">
+    <a href="/shop.html" style="color:var(--text-light);font-size:0.9rem;display:inline-block;margin-bottom:20px">← Back to Shop</a>
+    <div id="product-detail"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>🐾 Mozhi Dog</h4>
+      <p style="color:rgba(255,255,255,0.4);font-size:0.9rem">Adoptable puppies with AI-generated souls.</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><a href="/shop.html">All Puppies</a><a href="/shop.html?filter=outfits">Outfits</a><a href="/shop.html?filter=accessories">Accessories</a><a href="/shop.html?filter=bundles">Bundles</a></div>
+    <div class="footer-col"><h4>Learn</h4><a href="/about.html">Our Story</a><a href="/how-it-works.html">How It Works</a><a href="/faq.html">FAQ</a><a href="/contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Policies</h4><a href="/shipping.html">Shipping</a><a href="/refunds.html">Refunds</a><a href="/privacy.html">Privacy</a></div>
+  </div>
+  <div class="footer-bottom">© 2026 Mozhi Dog — 大连极选跨境电子商务有限公司</div>
+</footer>
+
+<div class="cart-overlay"></div>
+<div class="cart-sidebar">
+  <div class="cart-header"><h2>🛒 Your Adoption Cart</h2><button class="cart-close">✕</button></div>
+  <div class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total">Total: <span class="cart-total-amount">$0.00</span></div>
+    <button class="checkout-btn">Checkout →</button>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

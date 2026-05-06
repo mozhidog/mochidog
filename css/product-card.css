@@ -1,0 +1,29 @@
+/* Product image placeholder - professional product card */
+.product-image {
+  width: 100%; height: 280px;
+  background: linear-gradient(135deg, var(--cream) 0%, #EDE5D8 50%, #E8DFD2 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-image::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 60% 40%, rgba(196,149,106,0.15) 0%, transparent 60%);
+}
+.product-img-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  position: relative; z-index: 1;
+}
+.product-img-emoji { font-size: 4.5rem; line-height: 1; filter: grayscale(0.2); }
+.product-img-label {
+  font-size: 0.7rem; color: var(--brown); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2px;
+  background: rgba(255,255,255,0.7); padding: 2px 12px; border-radius: 10px;
+}
+/* When real image exists */
+.product-image.has-image {
+  background: var(--cream);
+}
+.product-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; inset: 0;
+}

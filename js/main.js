@@ -109,21 +109,21 @@ async function renderShop(filter = 'all') {
 
 // ============ Product Card HTML ============
 function productCardHTML(p) {
-  const emojis = {
-    'Golden': '🐕', 'Cream': '🐩', 'Chocolate': '🐶', 'Black & White': '🐾',
-    'Grey': '🐺', 'White': '🐻‍❄️', 'Orange-Brown': '🦊', 'Grey & White': '🐑',
-    'Brown': '🧸', 'Spotted': '🐕‍🦺', 'White & Tan': '🐕', 'Honey': '🐶',
-    'Silver': '🐩', 'Copper': '🐕', 'Tri-Color': '🐾', 'Light Gold': '🐕',
-    'Mango Yellow': '🌞', 'Cinnamon': '🍞', 'White-to-Pink': '🦄'
-  };
-  const emoji = emojis[p.color] || (p.category === 'Outfits' ? '👗' : p.category === 'Accessories' ? '🕶️' : '📦');
   const badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-  const typeLabel = p.type === 'puppy' ? 'Mozhi Puppy' : p.type === 'bundle' ? 'Bundle' : p.category || 'Accessory';
+  const typeLabel = p.type === 'puppy' ? 'Mozhi Puppy' : p.type === 'bundle' ? 'Adoption Bundle' : p.category || 'Accessory';
+  const imgPath = `/assets/products/${p.slug || p.id}.jpg`;
   
   return `
-    <div class="product-card" onclick="location.href='/products/${p.slug}.html'">
+    <div class="product-card"${p.slug ? ` onclick="location.href='/products/${p.slug}.html'"` : ''}>
       ${badgeHTML}
-      <div class="product-image placeholder">${emoji}</div>
+      <div class="product-image">
+        <img src="${imgPath}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="placeholder" style="display:none">
+          <span class="emoji">🐾</span>
+          <span class="label">${p.breed || p.name}</span>
+          <span class="sku">${p.id}</span>
+        </div>
+      </div>
       <div class="product-body">
         <div class="product-type">${typeLabel}</div>
         <h3>${p.name}</h3>
@@ -133,7 +133,7 @@ function productCardHTML(p) {
             <span class="product-price">$${p.price.toFixed(2)}</span>
             ${p.compareAt ? `<span class="product-compare">$${p.compareAt.toFixed(2)}</span>` : ''}
           </div>
-          <button class="add-to-cart" onclick="event.stopPropagation(); addToCart({id:'${p.id}',name:'${p.name}',price:${p.price},image:'${p.images?.[0]||'🐕'}'})">
+          <button class="add-to-cart" onclick="event.stopPropagation(); addToCart({id:'${p.id}',name:'${p.name.replace(/'/g,"\\'")}',price:${p.price},image:'${imgPath}'})">
             Adopt →
           </button>
         </div>

@@ -110,7 +110,7 @@ async function renderShop(filter = 'all') {
 // ============ Product Card HTML ============
 function productCardHTML(p) {
   const badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-  const typeLabel = p.type === 'puppy' ? 'Mozhi Puppy' : p.type === 'bundle' ? 'Adoption Bundle' : p.category || 'Accessory';
+  const typeLabel = p.type === 'puppy' ? 'Plush Toy' : p.type === 'bundle' ? 'Adoption Bundle' : p.category || 'Accessory';
   const imgPath = `/assets/products/${p.slug || p.id}.jpg`;
   
   return `
@@ -153,7 +153,7 @@ async function renderProductDetail() {
   
   const emoji = p.type === 'puppy' ? '🐕' : p.category === 'Outfits' ? '👗' : '🕶️';
   
-  document.title = `${p.name} — Mozhi Dog`;
+  document.title = `${p.name} — Plush Toy — Mozhi Dog`;
   container.innerHTML = `
     <div class="product-detail">
       <div class="product-gallery">${emoji}</div>

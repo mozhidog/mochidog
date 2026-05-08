@@ -20,7 +20,7 @@ function addToCart(product, qty = 1) {
   else { cart.push({ ...product, qty }); }
   saveCart(cart);
   updateCartUI();
-  showToast(`${product.name} added to cart! 🐾`);
+  showToast(`${product.name} added to your family! 🐾`);
 }
 
 function removeFromCart(id) {
@@ -59,7 +59,7 @@ function renderCartItems() {
   const cart = getCart();
   if (!container) return;
   if (cart.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">🛒</div><h3>Your cart is empty</h3><p>Find a plush dog to add!</p></div>';
+    container.innerHTML = '<div class="empty-state"><div class="icon">🛒</div><h3>Your adoption cart is empty</h3><p>Find a companion to adopt!</p></div>';
   } else {
     container.innerHTML = cart.map(item => `
       <div class="cart-item">
@@ -110,14 +110,14 @@ async function renderShop(filter = 'all') {
 // ============ Product Card HTML ============
 function productCardHTML(p) {
   const badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-  const typeLabel = p.type === 'puppy' ? 'Plush Toy' : p.type === 'bundle' ? 'Bundle' : p.category || 'Accessory';
-  const imgPath = `/assets/products/${p.slug || p.id}.jpg`;
+  const typeLabel = p.type === 'puppy' ? 'Companion' : p.type === 'bundle' ? 'Adoption Kit' : p.category || 'Accessory';
+  const imgPath = `/assets/products/${p.slug || p.id}`;
   
   return `
     <div class="product-card"${p.slug ? ` onclick="location.href='/products/${p.slug}.html'"` : ''}>
       ${badgeHTML}
       <div class="product-image">
-        <img src="${imgPath}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="${imgPath}.svg" alt="${p.name}" loading="lazy" onerror="this.src='${imgPath}.jpg';this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex'}">
         <div class="placeholder" style="display:none">
           <span class="emoji">🐾</span>
           <span class="label">${p.breed || p.name}</span>
@@ -149,14 +149,15 @@ async function renderProductDetail() {
   const slug = window.location.pathname.split('/').pop().replace('.html','');
   const products = await loadProducts();
   const p = products.find(x => x.slug === slug);
-  if (!p) { container.innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>Puppy not found</h3></div>'; return; }
+  if (!p) { container.innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>Companion not found</h3></div>'; return; }
   
   const emoji = p.type === 'puppy' ? '🐕' : p.category === 'Outfits' ? '👗' : '🕶️';
   
-  document.title = `${p.name} — Plush Toy — Mochidog`;
+  document.title = `${p.name} — Mochidog`;
+  const imgSrc = `/assets/products/${p.slug}.svg`;
   container.innerHTML = `
     <div class="product-detail">
-      <div class="product-gallery">${emoji}</div>
+      <div class="product-gallery"><img src="${imgSrc}" alt="${p.name}" style="width:100%;max-width:400px;border-radius:12px" onerror="this.parentElement.innerHTML='<span style=font-size:80px>${emoji}</span>'"></div>
       <div class="product-info">
         ${p.badge ? `<span class="badge" style="position:static;display:inline-block;margin-bottom:12px">${p.badge}</span>` : ''}
         <h1>${p.name}</h1>
@@ -178,7 +179,7 @@ async function renderProductDetail() {
           <button onclick="changeQty(1)">+</button>
         </div>
         <button class="btn btn-primary btn-large" onclick="addToCartFromDetail('${p.id}')">
-          🐾 Add to Cart — $${p.price.toFixed(2)}
+          🐾 Adopt — $${p.price.toFixed(2)}
         </button>
         ${p.story_preview ? `
         <div class="story-block">
@@ -199,7 +200,7 @@ function changeQty(delta) {
   const btn = document.querySelector('.btn-large');
   if (btn) {
     const price = parseFloat(btn.textContent.match(/[\d.]+/)?.[0] || 0) / detailQty;
-    btn.textContent = `🐾 Add to Cart — $${(price * detailQty).toFixed(2)}`;
+    btn.textContent = `🐾 Adopt — $${(price * detailQty).toFixed(2)}`;
   }
 }
 
@@ -257,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Checkout button
   document.querySelector('.checkout-btn')?.addEventListener('click', () => {
     const cart = getCart();
-    if (cart.length === 0) return showToast('Your cart is empty! 🛒');
+    if (cart.length === 0) return showToast('Your adoption cart is empty! 🛒');
     alert(`Checkout coming soon!\n\n${cart.length} items — Total: $${cartTotal().toFixed(2)}\n\nFor now, email your order to hello@mochidog.store`);
   });
 

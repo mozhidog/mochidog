@@ -100,17 +100,15 @@ async function renderShop(filter = 'all') {
   if (!grid) return;
   const products = await loadProducts();
   let filtered = products;
-  if (filter === 'puppies') filtered = products.filter(p => p.type === 'puppy');
-  else if (filter === 'outfits') filtered = products.filter(p => p.category === 'Outfits');
-  else if (filter === 'accessories') filtered = products.filter(p => p.category === 'Accessories');
-  else if (filter === 'bundles') filtered = products.filter(p => p.type === 'bundle');
+  if (filter === 'puppy') filtered = products.filter(p => p.type === 'puppy');
+  else if (filter === 'clothing') filtered = products.filter(p => p.type === 'clothing');
   grid.innerHTML = filtered.map(p => productCardHTML(p)).join('');
 }
 
 // ============ Product Card HTML ============
 function productCardHTML(p) {
   const badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-  const typeLabel = p.type === 'puppy' ? 'Companion' : p.type === 'bundle' ? 'Adoption Kit' : p.category || 'Accessory';
+  const typeLabel = p.type === 'puppy' ? '小狗' : '衣服';
   const imgPath = `/assets/products/${p.slug || p.id}`;
   
   return `
@@ -151,7 +149,7 @@ async function renderProductDetail() {
   const p = products.find(x => x.slug === slug);
   if (!p) { container.innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>Companion not found</h3></div>'; return; }
   
-  const emoji = p.type === 'puppy' ? '🐕' : p.category === 'Outfits' ? '👗' : '🕶️';
+  const emoji = p.type === 'puppy' ? '🐕' : '👗';
   
   document.title = `${p.name} — Mochidog`;
   const imgSrc = `/assets/products/${p.slug}`;
@@ -230,7 +228,7 @@ function renderReveal() {
       </div>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
         <a href="/shop.html" class="btn btn-primary">🐕 Get Another</a>
-        <a href="/shop.html?filter=outfits" class="btn btn-outline">👗 Shop Outfits</a>
+        <a href="/shop.html?filter=clothing" class="btn btn-outline">👗 Shop Clothes</a>
       </div>
     </div>`;
 }

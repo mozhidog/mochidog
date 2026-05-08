@@ -59,7 +59,7 @@ function renderCartItems() {
   const cart = getCart();
   if (!container) return;
   if (cart.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">🛒</div><h3>Your cart is empty</h3><p>Find a puppy to adopt!</p></div>';
+    container.innerHTML = '<div class="empty-state"><div class="icon">🛒</div><h3>Your cart is empty</h3><p>Find a plush dog to add!</p></div>';
   } else {
     container.innerHTML = cart.map(item => `
       <div class="cart-item">
@@ -110,7 +110,7 @@ async function renderShop(filter = 'all') {
 // ============ Product Card HTML ============
 function productCardHTML(p) {
   const badgeHTML = p.badge ? `<span class="badge">${p.badge}</span>` : '';
-  const typeLabel = p.type === 'puppy' ? 'Plush Toy' : p.type === 'bundle' ? 'Adoption Bundle' : p.category || 'Accessory';
+  const typeLabel = p.type === 'puppy' ? 'Plush Toy' : p.type === 'bundle' ? 'Bundle' : p.category || 'Accessory';
   const imgPath = `/assets/products/${p.slug || p.id}.jpg`;
   
   return `
@@ -134,7 +134,7 @@ function productCardHTML(p) {
             ${p.compareAt ? `<span class="product-compare">$${p.compareAt.toFixed(2)}</span>` : ''}
           </div>
           <button class="add-to-cart" onclick="event.stopPropagation(); addToCart({id:'${p.id}',name:'${p.name.replace(/'/g,"\\'")}',price:${p.price},image:'${imgPath}'})">
-            Adopt →
+            Add to Cart →
           </button>
         </div>
       </div>
@@ -178,7 +178,7 @@ async function renderProductDetail() {
           <button onclick="changeQty(1)">+</button>
         </div>
         <button class="btn btn-primary btn-large" onclick="addToCartFromDetail('${p.id}')">
-          🐾 Adopt Now — $${p.price.toFixed(2)}
+          🐾 Add to Cart — $${p.price.toFixed(2)}
         </button>
         ${p.story_preview ? `
         <div class="story-block">
@@ -199,7 +199,7 @@ function changeQty(delta) {
   const btn = document.querySelector('.btn-large');
   if (btn) {
     const price = parseFloat(btn.textContent.match(/[\d.]+/)?.[0] || 0) / detailQty;
-    btn.textContent = `🐾 Adopt Now — $${(price * detailQty).toFixed(2)}`;
+    btn.textContent = `🐾 Add to Cart — $${(price * detailQty).toFixed(2)}`;
   }
 }
 
@@ -210,8 +210,8 @@ async function addToCartFromDetail(id) {
   detailQty = 1;
 }
 
-// ============ Adoption Page ============
-function renderAdoption() {
+// ============ Identity Reveal Page ============
+function renderReveal() {
   const container = document.querySelector('#identity-reveal');
   if (!container) return;
   const params = new URLSearchParams(window.location.search);
@@ -220,15 +220,15 @@ function renderAdoption() {
     <div class="identity-reveal">
       <div class="celebration">🎉</div>
       <h2>Congratulations!</h2>
-      <p>You've adopted...</p>
-      <div class="puppy-name">✨ Your Puppy ✨</div>
+      <p>You've unlocked...</p>
+      <div class="puppy-name">✨ Your Mochidog ✨</div>
       <div class="story">
         <h3>📖 The Story of #${code}</h3>
-        <p>Your puppy's unique AI-generated story will appear here. Each Mochidog puppy has a one-of-a-kind identity — name, personality, birth story, and special quirks — all generated uniquely for them.</p>
+        <p>Your plush dog's unique AI-generated story will appear here. Each Mochidog has a one-of-a-kind identity — name, personality, backstory, and special quirks — all generated uniquely for them.</p>
         <p style="margin-top:12px;color:var(--coral)">💡 Scan the code on your identity card to unlock this plush dog's full identity!</p>
       </div>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="/shop.html" class="btn btn-primary">🐕 Adopt Another</a>
+        <a href="/shop.html" class="btn btn-primary">🐕 Get Another</a>
         <a href="/shop.html?filter=outfits" class="btn btn-outline">👗 Shop Outfits</a>
       </div>
     </div>`;
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFeatured();
   renderShop();
   renderProductDetail();
-  renderAdoption();
+  renderReveal();
 
   // Cart toggle listeners
   document.querySelectorAll('[data-cart-toggle]').forEach(el => {

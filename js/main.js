@@ -1,7 +1,7 @@
-// === Mozhi Dog — Main JS ===
+// === Mochidog — Main JS ===
 // Shopping cart, product loading, UI interactions
 
-const CART_KEY = 'mozhi_cart';
+const CART_KEY = 'mochidog_cart';
 const PRODUCTS_URL = '/data/products.json';
 
 // ============ Cart ============
@@ -153,7 +153,7 @@ async function renderProductDetail() {
   
   const emoji = p.type === 'puppy' ? '🐕' : p.category === 'Outfits' ? '👗' : '🕶️';
   
-  document.title = `${p.name} — Plush Toy — Mozhi Dog`;
+  document.title = `${p.name} — Plush Toy — Mochidog`;
   container.innerHTML = `
     <div class="product-detail">
       <div class="product-gallery">${emoji}</div>
@@ -224,7 +224,7 @@ function renderAdoption() {
       <div class="puppy-name">✨ Your Puppy ✨</div>
       <div class="story">
         <h3>📖 The Story of #${code}</h3>
-        <p>Your puppy's unique AI-generated story will appear here. Each Mozhi puppy has a one-of-a-kind identity — name, personality, birth story, and special quirks — all generated uniquely for them.</p>
+        <p>Your puppy's unique AI-generated story will appear here. Each Mochidog puppy has a one-of-a-kind identity — name, personality, birth story, and special quirks — all generated uniquely for them.</p>
         <p style="margin-top:12px;color:var(--coral)">💡 Scan the code on your adoption card to unlock this puppy's full identity!</p>
       </div>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">

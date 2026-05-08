@@ -117,7 +117,7 @@ function productCardHTML(p) {
     <div class="product-card"${p.slug ? ` onclick="location.href='/products/${p.slug}.html'"` : ''}>
       ${badgeHTML}
       <div class="product-image">
-        <img src="${imgPath}.svg" alt="${p.name}" loading="lazy" onerror="this.src='${imgPath}.jpg';this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex'}">
+        <img src="${imgPath}.jpg" alt="${p.name}" loading="lazy" onerror="this.src='${imgPath}.svg';this.onerror=function(){this.style.display='none';this.nextElementSibling.style.display='flex'}">
         <div class="placeholder" style="display:none">
           <span class="emoji">🐾</span>
           <span class="label">${p.breed || p.name}</span>
@@ -154,10 +154,10 @@ async function renderProductDetail() {
   const emoji = p.type === 'puppy' ? '🐕' : p.category === 'Outfits' ? '👗' : '🕶️';
   
   document.title = `${p.name} — Mochidog`;
-  const imgSrc = `/assets/products/${p.slug}.svg`;
+  const imgSrc = `/assets/products/${p.slug}`;
   container.innerHTML = `
     <div class="product-detail">
-      <div class="product-gallery"><img src="${imgSrc}" alt="${p.name}" style="width:100%;max-width:400px;border-radius:12px" onerror="this.parentElement.innerHTML='<span style=font-size:80px>${emoji}</span>'"></div>
+      <div class="product-gallery"><img src="${imgSrc}.jpg" alt="${p.name}" style="width:100%;max-width:400px;border-radius:12px" onerror="this.src='${imgSrc}.svg';this.onerror=function(){this.parentElement.innerHTML='<span style=font-size:80px>${emoji}</span>'}"></div>
       <div class="product-info">
         ${p.badge ? `<span class="badge" style="position:static;display:inline-block;margin-bottom:12px">${p.badge}</span>` : ''}
         <h1>${p.name}</h1>

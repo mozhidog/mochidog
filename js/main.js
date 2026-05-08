@@ -184,7 +184,7 @@ async function renderProductDetail() {
         <div class="story-block">
           <h3>📖 Story Preview</h3>
           <p>"${p.story_preview}"</p>
-          <p style="margin-top:8px;color:var(--coral);font-size:0.9rem">💡 Full story revealed after adoption!</p>
+          <p style="margin-top:8px;color:var(--coral);font-size:0.9rem">💡 Full story unlocked with your code!</p>
         </div>` : ''}
       </div>
     </div>
@@ -212,12 +212,12 @@ async function addToCartFromDetail(id) {
 
 // ============ Adoption Page ============
 function renderAdoption() {
-  const container = document.querySelector('#adoption-reveal');
+  const container = document.querySelector('#identity-reveal');
   if (!container) return;
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code') || 'Unknown';
   container.innerHTML = `
-    <div class="adoption-reveal">
+    <div class="identity-reveal">
       <div class="celebration">🎉</div>
       <h2>Congratulations!</h2>
       <p>You've adopted...</p>
@@ -225,7 +225,7 @@ function renderAdoption() {
       <div class="story">
         <h3>📖 The Story of #${code}</h3>
         <p>Your puppy's unique AI-generated story will appear here. Each Mochidog puppy has a one-of-a-kind identity — name, personality, birth story, and special quirks — all generated uniquely for them.</p>
-        <p style="margin-top:12px;color:var(--coral)">💡 Scan the code on your adoption card to unlock this puppy's full identity!</p>
+        <p style="margin-top:12px;color:var(--coral)">💡 Scan the code on your identity card to unlock this plush dog's full identity!</p>
       </div>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
         <a href="/shop.html" class="btn btn-primary">🐕 Adopt Another</a>

@@ -213,21 +213,18 @@ async function addToCartFromDetail(id) {
 function renderReveal() {
   const container = document.querySelector('#identity-reveal');
   if (!container) return;
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code') || 'Unknown';
   container.innerHTML = `
     <div class="identity-reveal">
       <div class="celebration">🎉</div>
-      <h2>Congratulations!</h2>
-      <p>You've unlocked...</p>
+      <h2>Welcome Home!</h2>
+      <p>Your handcrafted companion has arrived.</p>
       <div class="puppy-name">✨ Your Mochidog ✨</div>
       <div class="story">
-        <h3>📖 The Story of #${code}</h3>
-        <p>Your plush dog's unique AI-generated story will appear here. Each Mochidog has a one-of-a-kind identity — name, personality, backstory, and special quirks — all generated uniquely for them.</p>
-        <p style="margin-top:12px;color:var(--coral)">💡 Scan the code on your identity card to unlock this plush dog's full identity!</p>
+        <h3>📖 A Companion, Not a Commodity</h3>
+        <p>Every Mochidog is hand-finished in our Yiwu studio — the joints individually tensioned, the features hand-embroidered, the details shaped by human hands. No two are exactly alike. Yours was made just for you.</p>
       </div>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="/shop.html" class="btn btn-primary">🐕 Get Another</a>
+        <a href="/shop.html" class="btn btn-primary">🐕 Adopt Another</a>
         <a href="/shop.html?filter=clothing" class="btn btn-outline">👗 Shop Clothes</a>
       </div>
     </div>`;
